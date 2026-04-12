@@ -13,6 +13,7 @@ Visualize performance using graphs
 #How to run
 
 	1.	Install dependencies:
+      pip install matplotlib
       pip install streamlit matplotlib
 	2.	Run the app:
       streamlit run app

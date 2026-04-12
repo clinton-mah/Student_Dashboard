@@ -1,4 +1,5 @@
 import streamlit as st
+import matplotlib.pyplot as plt
 
 st.title("Student Dashboard")
 
@@ -35,3 +36,14 @@ if len(dic)>0:
 
 	top_student = max(dic, key=dic.get)
 	st.write("top student: ", top_student)
+if len(dic)>0:
+	names = list(dic.keys())
+	marks = list(dic.values())
+
+	fig, ax = plt.subplots()
+	ax.bar(names, marks)
+	ax.set_title("student performace")
+	ax.set_xlabel("students")
+	ax.set_ylabel("marks")
+
+	st.pyplot(fig)
