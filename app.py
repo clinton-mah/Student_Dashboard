@@ -1,37 +1,37 @@
-dic = {}
+import streamlit as st
 
-while(True):
-	user = input("enter student name(or done to stop): ")
-	if(user.lower() == "done"):
-		break
+st.title("Student Dashboard")
+
+if "dic" not in st.session_state:
+    st.session_state.dic = {} 
+name = st.text_input("enter student name")
+marks = st.number_input("enter student marks", min_value=0, max_value=100)
+
+if st.button("add student"):
+	if name:
+		st.session_state.dic[name] = marks
+		st.success(f"{name} added")
 	else:
-		try:
-			marks = int(input("enter marks: "))
-		except:
-			print("invalid input try again")
-			continue
-			
-		dic[user] = marks
-		
-lst = list(dic.values())
+		st.error("enter a name")
+dic = st.session_state.dic
 
-if len(lst)==0:
-	print("no data entered")
-else:
+st.write("current data: ",dic)
+if len(dic)>0:
+	lst = list(dic.values())
+
 	ave = sum(lst)/len(lst)
 	maximum = max(lst)
 	minimum = min(lst)
 
-	print(dic)
-	print("Average: ",ave)
-	print("Minimum: ",minimum)
-	print("Maximum: ",maximum)
-	print("")
+	
+	st.write("Average: ",ave)
+	st.write("Minimum: ",minimum)
+	st.write("Maximum: ",maximum)
 
 	if ave >= 50:
-		print("class outcome: Pass ")
+		st.success("class outcome: Pass ")
 	else:
-		print("class outcome: fail ")
+		st.error("class outcome: fail ")
 
 	top_student = max(dic, key=dic.get)
-	print("top student: ", top_student)
+	st.write("top student: ", top_student)
